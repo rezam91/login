@@ -2,7 +2,15 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import {useForm} from 'react-hook-form' 
 import * as yup from 'yup'
 import { useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 const Register = () => {
+    const [typedPass, setPass] = useState('')
+    useEffect(() => {
+        console.log(typedPass)
+    },[typedPass])
+    const recordPass = (e) => {
+        setPass(e.target.value)
+    }
     const navigate = useNavigate()
     const checkPhone = (item) => {
         if (!item) {
@@ -20,7 +28,9 @@ const Register = () => {
         firstName: yup.string().required().min(3).max(255),
         lastName: yup.string().required().min(3).max(255),
         email: yup.string().required().email(),
-        phone: yup.string().required().test('check-phone', 'Write phone number in correct form',checkPhone)
+        phone: yup.string().required().test('check-phone', 'Write phone number in correct form',checkPhone),
+        username: yup.string().required().min(5).max(20),
+        password: yup.string().required().min(8).matches(/[a-z]/,'Password should contain a letter in lower-case').matches(/[A-Z]/,'Password should contain a letter in upper-case').matches(/[@$&!%?*#{};()+-]/,'Password should contain a special character').matches(/[0-9]/,'Password should contain a number')
     })
     const {handleSubmit , register, formState} = useForm({
         defaultValues: {
@@ -65,12 +75,12 @@ const Register = () => {
                 </div>
                 <div>
                     <label>Password :</label>
-                    <input type="text" {...register('password')} />
+                    <input type="password" {...register('password', {onChange: recordPass})} />
                     <div>{formState.errors.password && formState.errors.password.message}</div>
                 </div>
                 <div>
                     <label>Confirm Password :</label>
-                    <input type="text" {...register('confirm')} />
+                    <input type="password" {...register('confirm')} />
                     <div>{formState.errors.confirm && formState.errors.confirm.message}</div>
                 </div>
                 <button type='submit'>Register</button>
