@@ -3,10 +3,19 @@ import {useForm} from 'react-hook-form'
 import * as yup from 'yup'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-const Register = ({ onRegister }) => {
+const Register = ({ onRegister, existUsers }) => {
     const [typedPass, setPass] = useState('')
-
     const navigate = useNavigate()
+    const checkUsername = (item) => {
+        if (!existUsers.length) return true
+        if (!item) return false
+        
+        if (existUsers.some((users) => (users.username === item))) {
+            return false
+        } else {
+            return true
+        }
+    }
     const checkPhone = (item) => {
         if (!item) return false
 
@@ -27,7 +36,7 @@ const Register = ({ onRegister }) => {
         lastName: yup.string().required().min(3).max(255),
         email: yup.string().required().email(),
         phone: yup.string().required().test('check-phone', 'Write phone number in correct form',checkPhone),
-        username: yup.string().required().min(5).max(20),
+        username: yup.string().required().min(5).max(20).test('rep-user', 'This Username is already taken, Choose another one!', checkUsername),
         password: yup.string().required().min(8).matches(/[a-z]/,'Password should contain a letter in lower-case').matches(/[A-Z]/,'Password should contain a letter in upper-case').matches(/[@$&!%?*#{};()+-]/,'Password should contain a special character').matches(/[0-9]/,'Password should contain a number'),
         confirm: yup.string().test('checkPass', 'Inserted password is not the same!',checkPass)
     })

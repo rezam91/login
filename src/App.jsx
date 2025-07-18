@@ -9,12 +9,13 @@ const App = () => {
     const setNewRegistered = (item) => {
         setRegistered([...registered,item])
     }
+
   return (
     <>
       <Header/>
       <Routes>
         <Route path="/" element={<Home persons={registered} />} />
-        <Route path="/register" element={<Register onRegister={setNewRegistered} />} />
+        <Route path="/register" element={<Register onRegister={setNewRegistered} existUsers={registered} />} />
       </Routes>
     </>
   )
