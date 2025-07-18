@@ -61,38 +61,38 @@ const Register = ({ onRegister, existUsers }) => {
                     <label>First Name:</label>
                     <input type="text" placeholder='Enter your first name' {...register('firstName')} />
                 </div>
-                <div>{formState.errors.firstName && formState.errors.firstName.message}</div>
+                <div className='error-text'>{formState.errors.firstName && "*** "+formState.errors.firstName.message}</div>
 
                 <div className='form-item'>
                     <label>Last Name:</label>
                     <input type="text" placeholder='Enter your last name' {...register('lastName')} />
                 </div>
-                <div>{formState.errors.lastName && formState.errors.lastName.message}</div>
+                <div className='error-text'>{formState.errors.lastName && "*** "+formState.errors.lastName.message}</div>
                 <div className='form-item'>
                     <label>Email:</label>
                     <input type="text" placeholder='Enter your E-mail address' {...register('email')} />
                 </div>
-                <div>{formState.errors.email && formState.errors.email.message}</div>
+                <div className='error-text'>{formState.errors.email && "*** "+formState.errors.email.message}</div>
                 <div className='form-item'>
                     <label>Phone:</label>
                     <input type="text" placeholder='09123456789 or +989123456789' {...register('phone')} />
                 </div>
-                <div>{formState.errors.phone && formState.errors.phone.message}</div>
+                <div className='error-text'>{formState.errors.phone && "*** "+formState.errors.phone.message}</div>
                 <div className='form-item'>
                     <label>Username:</label>
                     <input type="text" placeholder='At least 5 characters' {...register('username')} />
                 </div>
-                <div>{formState.errors.username && formState.errors.username.message}</div>
+                <div className='error-text'>{formState.errors.username && "*** "+formState.errors.username.message}</div>
                 <div className='form-item'>
                     <label>Password:</label>
                     <input type="password"  placeholder='Contain lower-upper-special char' {...register('password', {onChange: (e) => setPass(e.target.value)})} />
                 </div>
-                <div>{formState.errors.password && formState.errors.password.message}</div>
+                <div className='error-text'>{formState.errors.password && "*** "+formState.errors.password.message}</div>
                 <div className='form-item'>
                     <label>Confirm Password:</label>
                     <input type="password" placeholder='Re-Enter your password' {...register('confirm')} />
                 </div>
-                <div>{formState.errors.confirm && formState.errors.confirm.message}</div>
+                <div className='error-text'>{formState.errors.confirm && "*** "+formState.errors.confirm.message}</div>
                 <hr />
                 <div className='button-wrapper'>
                     <button type='submit'>Register</button>
