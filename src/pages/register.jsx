@@ -3,7 +3,7 @@ import {useForm} from 'react-hook-form'
 import * as yup from 'yup'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-const Register = () => {
+const Register = ({ onRegister }) => {
     const [typedPass, setPass] = useState('')
 
     const navigate = useNavigate()
@@ -32,14 +32,12 @@ const Register = () => {
         confirm: yup.string().test('checkPass', 'Inserted password is not the same!',checkPass)
     })
     const {handleSubmit , register, formState} = useForm({
-        defaultValues: {
-            // firstName: 'name'
-        },
         resolver: yupResolver(schema)
     })
     
     const Submitted = (data) => {
         alert(`Dear/Madam ${data.firstName}, Registeration Completed Successfully`)
+        onRegister(data)
         navigate('/')
     }
     const homeButton = () => {
