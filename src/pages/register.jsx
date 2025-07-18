@@ -33,59 +33,66 @@ const Register = () => {
     })
     const {handleSubmit , register, formState} = useForm({
         defaultValues: {
-            firstName: 'name'
+            // firstName: 'name'
         },
         resolver: yupResolver(schema)
     })
     
     const Submitted = (data) => {
-        alert('submit', data)
+        alert(`Dear/Madam ${data.firstName}, Registeration Completed Successfully`)
+        navigate('/')
     }
     const homeButton = () => {
         navigate('/')
     }
     return (
-        <>
-            <form onSubmit={handleSubmit(Submitted)}>
-                <div>
+        <section className='reg-sec'>
+            <h1>Registeration Form</h1>
+            <hr />
+            <form className='form' onSubmit={handleSubmit(Submitted)}>
+                <div className='form-item'>
                     <label>First Name:</label>
-                    <input type="text" {...register('firstName')} />
-                    <div>{formState.errors.firstName && formState.errors.firstName.message}</div>
+                    <input type="text" placeholder='Enter your first name' {...register('firstName')} />
                 </div>
-                <div>
+                <div>{formState.errors.firstName && formState.errors.firstName.message}</div>
+
+                <div className='form-item'>
                     <label>Last Name:</label>
-                    <input type="text" {...register('lastName')} />
-                    <div>{formState.errors.lastName && formState.errors.lastName.message}</div>
+                    <input type="text" placeholder='Enter your last name' {...register('lastName')} />
                 </div>
-                <div>
+                <div>{formState.errors.lastName && formState.errors.lastName.message}</div>
+                <div className='form-item'>
                     <label>Email:</label>
-                    <input type="text" {...register('email')} />
-                    <div>{formState.errors.email && formState.errors.email.message}</div>
+                    <input type="text" placeholder='Enter your E-mail address' {...register('email')} />
                 </div>
-                <div>
+                <div>{formState.errors.email && formState.errors.email.message}</div>
+                <div className='form-item'>
                     <label>Phone:</label>
-                    <input type="text" {...register('phone')} />
-                    <div>{formState.errors.phone && formState.errors.phone.message}</div>
+                    <input type="text" placeholder='09123456789 or +989123456789' {...register('phone')} />
                 </div>
-                <div>
+                <div>{formState.errors.phone && formState.errors.phone.message}</div>
+                <div className='form-item'>
                     <label>Username:</label>
-                    <input type="text" {...register('username')} />
-                    <div>{formState.errors.username && formState.errors.username.message}</div>
+                    <input type="text" placeholder='At least 5 characters' {...register('username')} />
                 </div>
-                <div>
+                <div>{formState.errors.username && formState.errors.username.message}</div>
+                <div className='form-item'>
                     <label>Password:</label>
-                    <input type="password" {...register('password', {onChange: (e) => setPass(e.target.value)})} />
-                    <div>{formState.errors.password && formState.errors.password.message}</div>
+                    <input type="password"  placeholder='Contain lower-upper-special char' {...register('password', {onChange: (e) => setPass(e.target.value)})} />
                 </div>
-                <div>
+                <div>{formState.errors.password && formState.errors.password.message}</div>
+                <div className='form-item'>
                     <label>Confirm Password:</label>
-                    <input type="password" {...register('confirm')} />
-                    <div>{formState.errors.confirm && formState.errors.confirm.message}</div>
+                    <input type="password" placeholder='Re-Enter your password' {...register('confirm')} />
                 </div>
-                <button type='submit'>Register</button>
-                <button onClick={homeButton}>Back</button>
+                <div>{formState.errors.confirm && formState.errors.confirm.message}</div>
+                <hr />
+                <div className='button-wrapper'>
+                    <button type='submit'>Register</button>
+                    <button onClick={homeButton}>Back</button>
+                </div>
             </form>
-        </>
+        </section>
     )
 }
 
